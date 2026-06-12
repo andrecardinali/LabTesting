@@ -1,9 +1,19 @@
 #include <gtest/gtest.h>
 #include "config_parser.h"
 
+class ConfigParserFixture : public ::testing::Test {
+protected:
+    ConfigPair* pair = nullptr;
+
+    void TearDown() override {
+        delete pair;
+        pair = nullptr;
+    }
+};
+
 // ESEMPIO PROFESSORE:
-TEST(ConfigParserTest, ParseValidLine) {
-    ConfigPair* pair = ParseConfigLine("host=localhost");
+TEST_F(ConfigParserFixture, ParseValidLine) {
+    pair = ParseConfigLine("host=localhost");
     
     // Usiamo ASSERT_NE perche' se pair e' null, dereferenziarlo crasherà il test
     ASSERT_NE(pair, nullptr) << "Il parsing di una linea valida non deve restituire null";
@@ -17,23 +27,23 @@ TEST(ConfigParserTest, ParseValidLine) {
 
 // TODO STUDENTE 1: Testa cosa succede se la linea non contiene il carattere '=' (es. "invalidline")
 // Assicurati che restituisca nullptr. Aggiungi un messaggio personalizzato in caso di fallimento.
-TEST(ConfigParserTest, ParseLineWithoutEqualsSignReturnsNull) {
+TEST_F(ConfigParserFixture, ParseLineWithoutEqualsSignReturnsNull) {
     // IL TUO CODICE QUI
-    ConfigPair* pair = ParseConfigLine("invalidline");
+    pair = ParseConfigLine("invalidline");
     EXPECT_EQ(pair, nullptr) << "Il parsing di una linea senza '=' deve restituire null";
 }
 
 // TODO STUDENTE 2: Testa il parsing di una linea vuota "".
-TEST(ConfigParserTest, ParseEmptyLineReturnsNull) {
+TEST_F(ConfigParserFixture, ParseEmptyLineReturnsNull) {
     // IL TUO CODICE QUI
-    ConfigPair* pair = ParseConfigLine("");
+    pair = ParseConfigLine("");
     EXPECT_EQ(pair, nullptr) << "Il parsing di una linea vuota deve restituire null";
 }
 
 // TODO STUDENTE 3: La funzione IsValidKeyName accetta solo lettere e numeri.
 // Scrivi un test che verifichi almeno 3 casi validi e 3 casi non validi 
 // (es. stringhe con spazi, caratteri speciali). Usa EXPECT_EQ confrontando con true/false.
-TEST(KeyValidationTest, ValidatesKeyCharactersCorrectly) {
+TEST(KeyValidationFixture, ValidatesKeyCharactersCorrectly) {
     // IL TUO CODICE QUI
     EXPECT_EQ(IsValidKeyName("host"), true) << "La chiave 'host' dovrebbe essere valida";
     EXPECT_EQ(IsValidKeyName("port123"), true) << "La chiave 'port123' dovrebbe essere valida";
