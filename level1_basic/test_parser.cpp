@@ -19,7 +19,6 @@ TEST(ConfigParserTest, ParseValidLine) {
 // Assicurati che restituisca nullptr. Aggiungi un messaggio personalizzato in caso di fallimento.
 TEST(ConfigParserTest, ParseLineWithoutEqualsSignReturnsNull) {
     // IL TUO CODICE QUI
-    // Prova codice
     ConfigPair* pair = ParseConfigLine("invalidline");
     EXPECT_EQ(pair, nullptr) << "Il parsing di una linea senza '=' deve restituire null";
 }
@@ -36,7 +35,6 @@ TEST(ConfigParserTest, ParseEmptyLineReturnsNull) {
 // (es. stringhe con spazi, caratteri speciali). Usa EXPECT_EQ confrontando con true/false.
 TEST(KeyValidationTest, ValidatesKeyCharactersCorrectly) {
     // IL TUO CODICE QUI
-    // Casi validi
     EXPECT_EQ(IsValidKeyName("host"), true) << "La chiave 'host' dovrebbe essere valida";
     EXPECT_EQ(IsValidKeyName("port123"), true) << "La chiave 'port123' dovrebbe essere valida";
     EXPECT_EQ(IsValidKeyName("username"), true) << "La chiave 'username' dovrebbe essere valida";
