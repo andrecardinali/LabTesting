@@ -38,6 +38,8 @@ TEST(ShoppingCartTest, ExtractsExistingItemCorrectly) {
     ASSERT_NE(extracted, nullptr) << "ExtractItem dovrebbe restituire un puntatore non nullo per un prodotto esistente.";
     EXPECT_EQ(extracted->name, "Formaggio") << "Il nome dell'articolo estratto dovrebbe essere 'Formaggio'.";
     EXPECT_EQ(extracted->price_cents, 250) << "Il prezzo in centesimi dell'articolo estratto dovrebbe essere 250.";
+    EXPECT_EQ(cart.GetItemCount(), 0) << "Il conteggio degli articoli dovrebbe essere 0 dopo aver estratto l'unico prodotto.";
+    EXPECT_EQ(cart.GetTotalCents(), 0) << "Il totale in centesimi dovrebbe essere 0 dopo aver estratto l'unico prodotto.";
     delete extracted;
 }
 
