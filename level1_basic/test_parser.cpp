@@ -36,4 +36,11 @@ TEST(ConfigParserTest, ParseEmptyLineReturnsNull) {
 // (es. stringhe con spazi, caratteri speciali). Usa EXPECT_EQ confrontando con true/false.
 TEST(KeyValidationTest, ValidatesKeyCharactersCorrectly) {
     // IL TUO CODICE QUI
+    // Casi validi
+    EXPECT_EQ(IsValidKeyName("host"), true) << "La chiave 'host' dovrebbe essere valida";
+    EXPECT_EQ(IsValidKeyName("port123"), true) << "La chiave 'port123' dovrebbe essere valida";
+    EXPECT_EQ(IsValidKeyName("username"), true) << "La chiave 'username' dovrebbe essere valida";
+    EXPECT_EQ(IsValidKeyName("invalid key"), false) << "La chiave 'invalid key' non dovrebbe essere valida";
+    EXPECT_EQ(IsValidKeyName("invalid-key"), false) << "La chiave 'invalid-key' non dovrebbe essere valida";
+    EXPECT_EQ(IsValidKeyName("invalid$key"), false) << "La chiave 'invalid$key' non dovrebbe essere valida";
 }
